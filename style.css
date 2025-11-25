@@ -1,8 +1,10 @@
 /* ========================================
-   SmartGrid v1.0 - Stylesheet
+   SmartGrid v1.0 - Stylesheet (최적화 버전)
    ======================================== */
 
-/* ===== [1. CSS Variables] ===== */
+/* ----------------------------------------
+   [1. CSS Variables] - 전역 설정 변수
+   ---------------------------------------- */
 :root {
   /* Color Palette - Gray */
   --sg-gray-50: #f9fafb;
@@ -43,24 +45,35 @@
   /* 16px */
 
   /* Border & Shadow */
-  --sg-border-radius: 6px;
+  --sg-border-radius: 0.375rem;
   --sg-border-radius-sm: 4px;
-  --sg-border-color: var(--sg-gray-300);
+  --sg-border-color: #dee2e6;
   --sg-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --sg-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   --sg-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
 
-  /* Grid Specific */
-  --row-height: 30px;
+  /* Grid Specific Dimensions */
+  --row-height: 35px;
   --cell-padding-v: 6px;
   --cell-padding-h: 10px;
-  --sg-col-checkbox-width: 30px;
-  --sg-col-index-width: 45px;
+  --sg-col-checkbox-width: 30px !important;
+  --sg-col-index-width: 45px !important;
 }
 
-/* ===== [2. Reset & Base] ===== */
+/* 체크박스 칼럼 너비 설정 (Sticky Column에 사용됨) */
+.sg-col-checkbox {
+  width: var(--sg-col-checkbox-width) !important;
+}
+
+/* ----------------------------------------
+     [2. Reset & Base] - 기본 스타일 및 레이아웃
+     ---------------------------------------- */
 * {
   box-sizing: border-box;
+}
+
+html {
+  font-size: 0.875rem;
 }
 
 body {
@@ -71,9 +84,19 @@ body {
   margin: 0;
   padding: var(--sg-spacing-xl);
   line-height: 1.5;
+  /* background-color: #f4f7f6; */
 }
 
-/* ===== [3. Header & Logo] ===== */
+h1 {
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  font-size: 2rem;
+}
+
+/* ----------------------------------------
+     [3. Header & Logo] - 애플리케이션 상단 영역
+     ---------------------------------------- */
 .smartgrid-header {
   display: flex;
   justify-content: space-between;
@@ -106,7 +129,9 @@ body {
   gap: var(--sg-spacing-sm);
 }
 
-/* ===== [4. Filter Panel] ===== */
+/* ----------------------------------------
+     [4. Filter Panel] - 검색 및 필터링 영역
+     ---------------------------------------- */
 .smartgrid-filter-panel {
   background: white;
   border: 1px solid var(--sg-border-color);
@@ -178,7 +203,9 @@ body {
   cursor: pointer;
 }
 
-/* ===== [5. Toolbar] ===== */
+/* ----------------------------------------
+     [5. Toolbar & Custom Items] - 그리드 기능 버튼 영역
+     ---------------------------------------- */
 .smartgrid-toolbar-container {
   margin-bottom: 10px;
   border-bottom: 1px solid var(--sg-border-color);
@@ -189,10 +216,6 @@ body {
   padding: 1rem;
   border-radius: var(--sg-border-radius);
   background-color: white;
-  display: inline-flex;
-}
-
-.smartgrid-toolbar-info-section {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -228,7 +251,53 @@ body {
   align-items: center;
 }
 
-/* ===== [6. Buttons] ===== */
+/* 툴바에 추가된 모든 커스텀 아이템(select, button, checkbox wrapper)에 적용됩니다. */
+.smartgrid-toolbar-custom-item {
+  margin-right: 5px;
+  font-size: 13px;
+}
+
+.smartgrid-toolbar-checkbox-wrapper,
+.smartgrid-toolbar-radio-wrapper {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px;
+  border: 1px solid var(--sg-border-color);
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+.smartgrid-toolbar-checkbox-label,
+.smartgrid-toolbar-radio-label {
+  margin-left: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+}
+
+.smartgrid-toolbar-radio-wrapper .smartgrid-toolbar-radio-group {
+  display: inline-flex;
+  align-items: center;
+}
+
+.smartgrid-toolbar-number {
+  display: inline-block;
+  height: 31px;
+  padding: 5px 10px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--sg-gray-700);
+  /* 기존 --sg-dark를 gray-700으로 변경 */
+  background-color: #fff;
+  border: 1px solid var(--sg-border-color);
+  border-radius: 4px;
+  width: 100px;
+}
+
+/* ----------------------------------------
+     [6. Buttons] - 버튼 기본 및 변형 스타일
+     ---------------------------------------- */
 .smartgrid-btn {
   display: inline-flex;
   align-items: center;
@@ -307,7 +376,9 @@ body {
   border-color: var(--sg-danger-dark);
 }
 
-/* ===== [7. Icons & Text] ===== */
+/* ----------------------------------------
+     [7. Icons & Text Utilities] - 아이콘 및 정보 텍스트
+     ---------------------------------------- */
 .smartgrid-icon {
   width: 16px;
   height: 16px;
@@ -320,7 +391,18 @@ body {
   font-weight: 500;
 }
 
-/* ===== [8. Form Elements] ===== */
+.smartgrid-info-panel {
+  padding: var(--sg-spacing-md);
+  background: white;
+  border: 1px solid var(--sg-border-color);
+  border-radius: var(--sg-border-radius);
+  margin-bottom: var(--sg-spacing-lg);
+  box-shadow: var(--sg-shadow-sm);
+}
+
+/* ----------------------------------------
+     [8. Form Elements (Global)] - 전역 폼 요소
+     ---------------------------------------- */
 .smartgrid-select {
   padding: var(--sg-spacing-sm) var(--sg-spacing-md);
   font-size: var(--sg-font-size-sm);
@@ -342,35 +424,31 @@ body {
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.smartgrid-info-panel {
-  padding: var(--sg-spacing-md);
-  background: white;
-  border: 1px solid var(--sg-border-color);
-  border-radius: var(--sg-border-radius);
-  margin-bottom: var(--sg-spacing-lg);
-  box-shadow: var(--sg-shadow-sm);
-}
-
-/* ===== [9. Grid Container] ===== */
+/* ----------------------------------------
+     [9. Grid Container] - 그리드 테이블 래퍼
+     ---------------------------------------- */
 .smartgrid-container {
-  border: 1px solid #ddd;
-  border-radius: 5px;
   overflow: auto;
   height: 500px;
   background: white;
   box-shadow: none;
+  position: relative;
 }
 
-/* ===== [10. Table Base] ===== */
+/* ----------------------------------------
+     [10. Table Base] - 테이블 공통 스타일
+     ---------------------------------------- */
 .smartgrid-table {
-  width: 100%;
+  min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   font-size: var(--sg-font-size-sm);
   table-layout: fixed;
 }
 
-/* ===== [11. Table Header] ===== */
+/* ----------------------------------------
+     [11. Table Header] - 테이블 헤더 스타일
+     ---------------------------------------- */
 .smartgrid-table thead th {
   text-align: center;
   font-weight: bold;
@@ -413,12 +491,7 @@ body {
   justify-content: flex-end;
 }
 
-/* Sort Indicator */
-.smartgrid-table .sort-indicator {
-  display: inline-flex;
-  align-items: center;
-}
-
+/* Sort Indicator & Badge */
 .smartgrid-table th .sort-indicator {
   display: inline-flex;
   align-items: center;
@@ -438,7 +511,9 @@ body {
   vertical-align: middle;
 }
 
-/* ===== [12. Table Body] ===== */
+/* ----------------------------------------
+     [12. Table Body & Row States] - 테이블 본문 및 행 상태
+     ---------------------------------------- */
 .smartgrid-table td {
   white-space: nowrap;
   border-right: 1px solid #ddd;
@@ -456,34 +531,55 @@ body {
   border-left: 1px solid #ddd;
 }
 
-/* Row Striping */
+/* Row Striping (지브라 스타일) */
 .smartgrid-table tbody tr:nth-child(even) td {
   background: #fafafa;
 }
 
-/* Row Hover */
+/* Row Hover (기본 호버 스타일) */
 .smartgrid-table tbody tr:hover td {
   background: #e3f2fd !important;
 }
 
-/* Row States */
-.smartgrid-table .row-new {
-  background: #e8f5e9;
+/* 체크박스 선택시 행 배경색 변경 (Check State) */
+.smartgrid-table tr.row-checked td {
+  background-color: #e3f2fd !important;
+  color: #0d47a1;
 }
 
-.smartgrid-table .row-new:hover {
-  background: #c8e6c9;
+.smartgrid-table tr.row-checked:hover td {
+  background-color: #bbdefb !important;
 }
 
-.smartgrid-table .row-updated {
-  background: #e3f2fd;
+/* 새 행 추가시 배경색 변경 (New Row State) */
+.smartgrid-table .row-new td {
+  background: #e8f5e9 !important;
 }
 
-.smartgrid-table .row-updated:hover {
-  background: #bbdefb;
+.smartgrid-table .row-new:hover td {
+  background: #c8e6c9 !important;
 }
 
-/* Cell Content Wrapper */
+/* 수정된 행 배경색 변경 (Updated Row State) */
+.smartgrid-table .row-updated td {
+  /* row-checked와 동일한 색상 사용 */
+  background: #e3f2fd !important;
+}
+
+.smartgrid-table .row-updated:hover td {
+  /* row-checked:hover와 동일한 색상 사용 */
+  background: #bbdefb !important;
+}
+
+/* 🌟 [추가] Readonly/Non-editable Cell States - 비활성화 셀 배경색 정의 */
+.smartgrid-table td.sg-cell-readonly {
+  /* 배경색을 --sg-gray-100으로 설정하여 비활성화 상태를 표시합니다. */
+  background-color: var(--sg-gray-100) !important;
+  color: var(--sg-gray-600);
+  /* 텍스트 색상을 약간 어둡게 하여 비활성화 느낌 강조 (선택 사항) */
+}
+
+/* Cell Content Wrapper (모든 셀 콘텐츠에 적용) */
 .smartgrid-table tbody td>span,
 .smartgrid-table tfoot td>span {
   display: flex;
@@ -501,7 +597,9 @@ body {
   justify-content: flex-end;
 }
 
-/* ===== [13. Table Footer] ===== */
+/* ----------------------------------------
+     [13. Table Footer] - 테이블 푸터 스타일 (합계/총계)
+     ---------------------------------------- */
 .smartgrid-table tfoot td {
   position: sticky;
   bottom: 0;
@@ -531,7 +629,9 @@ body {
   justify-content: flex-end;
 }
 
-/* ===== [14. Sticky Columns (Checkbox & Index)] ===== */
+/* ----------------------------------------
+     [14. Sticky Columns] - 고정 칼럼 (체크박스/순번)
+     ---------------------------------------- */
 .smartgrid-table thead th:nth-child(1),
 .smartgrid-table thead th:nth-child(2),
 .smartgrid-table tbody td:nth-child(1),
@@ -543,7 +643,7 @@ body {
   text-align: center;
 }
 
-/* Checkbox Column */
+/* Checkbox Column (1st child) */
 .smartgrid-table thead th:nth-child(1),
 .smartgrid-table tbody td:nth-child(1),
 .smartgrid-table tfoot td:nth-child(1) {
@@ -553,7 +653,7 @@ body {
   max-width: var(--sg-col-checkbox-width) !important;
 }
 
-/* Index Column */
+/* Index Column (2nd child) */
 .smartgrid-table thead th:nth-child(2),
 .smartgrid-table tbody td:nth-child(2),
 .smartgrid-table tfoot td:nth-child(2) {
@@ -563,7 +663,7 @@ body {
   max-width: var(--sg-col-index-width) !important;
 }
 
-/* Sticky Column Backgrounds */
+/* Sticky Column Default & Zebra Backgrounds */
 .smartgrid-table tbody td:nth-child(1),
 .smartgrid-table tbody td:nth-child(2) {
   background: white;
@@ -574,17 +674,55 @@ body {
   background: #fafafa;
 }
 
-/* Sticky Column Hover States */
+/* Sticky Column Hover States (일반/짝수 행 모두 이 셀렉터로 처리) */
 .smartgrid-table tbody tr:hover td:nth-child(1),
 .smartgrid-table tbody tr:hover td:nth-child(2) {
-  background: white !important;
+  /* 행의 기본 호버 색상인 #e3f2fd 을 사용 */
+  background: #e3f2fd !important;
 }
 
-.smartgrid-table tbody tr:nth-child(even):hover td:nth-child(1),
-.smartgrid-table tbody tr:nth-child(even):hover td:nth-child(2) {
-  background: #fafafa !important;
+/* 🌟 [수정/추가] Sticky Column Checked Row States */
+.smartgrid-table tbody tr.row-checked td:nth-child(1),
+.smartgrid-table tbody tr.row-checked td:nth-child(2) {
+  /* 일반 셀의 row-checked 색상: #e3f2fd */
+  background-color: #e3f2fd !important;
 }
 
+.smartgrid-table tbody tr.row-checked:hover td:nth-child(1),
+.smartgrid-table tbody tr.row-checked:hover td:nth-child(2) {
+  /* 일반 셀의 row-checked:hover 색상: #bbdefb */
+  background-color: #bbdefb !important;
+}
+
+/* 🌟 [추가/핵심] Sticky Column New & Checked Row States (우선순위 확보) */
+.smartgrid-table tbody tr.row-new.row-checked td:nth-child(1),
+.smartgrid-table tbody tr.row-new.row-checked td:nth-child(2) {
+  /* 새 행이 체크되었을 때 일반 체크 색상을 따름 */
+  background-color: #e3f2fd !important;
+}
+
+.smartgrid-table tbody tr.row-new.row-checked:hover td:nth-child(1),
+.smartgrid-table tbody tr.row-new.row-checked:hover td:nth-child(2) {
+  /* 새 행이 체크되었을 때 호버 색상을 따름 */
+  background-color: #bbdefb !important;
+}
+
+
+/* 🌟 [수정/확인] Sticky Column New Row States */
+.smartgrid-table .row-new td:nth-child(1),
+.smartgrid-table .row-new td:nth-child(2) {
+  /* 일반 셀의 row-new 색상: #e8f5e9 */
+  background: #e8f5e9 !important;
+}
+
+.smartgrid-table .row-new:hover td:nth-child(1),
+.smartgrid-table .row-new:hover td:nth-child(2) {
+  /* 일반 셀의 row-new:hover 색상: #c8e6c9 */
+  background: #c8e6c9 !important;
+}
+
+
+/* Sticky Column Updated Row States */
 .smartgrid-table tbody tr.row-updated td:nth-child(1),
 .smartgrid-table tbody tr.row-updated td:nth-child(2) {
   background: #e3f2fd;
@@ -592,10 +730,10 @@ body {
 
 .smartgrid-table tbody tr.row-updated:hover td:nth-child(1),
 .smartgrid-table tbody tr.row-updated:hover td:nth-child(2) {
-  background: #e3f2fd !important;
+  background: #bbdefb !important;
 }
 
-/* Sticky Header/Footer Z-index */
+/* Sticky Header/Footer Z-index (테이블 스크롤 시 상단/하단 고정) */
 .smartgrid-table thead th:nth-child(1),
 .smartgrid-table thead th:nth-child(2) {
   z-index: 15;
@@ -608,7 +746,9 @@ body {
   background: linear-gradient(to bottom, #fafafa, #efefef);
 }
 
-/* ===== [15. Column Resizer] ===== */
+/* ----------------------------------------
+     [15. Column Resizer] - 칼럼 너비 조절 핸들
+     ---------------------------------------- */
 .column-resizer {
   position: absolute;
   right: 0;
@@ -627,7 +767,9 @@ body {
   cursor: col-resize;
 }
 
-/* ===== [16. Input Elements] ===== */
+/* ----------------------------------------
+     [16. Input Elements] - 그리드 셀 내 입력 필드
+     ---------------------------------------- */
 .smartgrid-table tbody td .smartgrid-input,
 .smartgrid-table tbody td .smartgrid-input-text,
 .smartgrid-table tbody td .smartgrid-input-number,
@@ -641,9 +783,7 @@ body {
   width: 100%;
   height: var(--row-height);
   padding: var(--cell-padding-v) var(--cell-padding-h);
-  /* border: none; */
-  border: 1px solid var(--sg-border-color);
-  border-radius: 0;
+  border: none;
   background-color: transparent;
   font-size: var(--sg-font-size-sm);
   font-family: var(--sg-font-family);
@@ -657,7 +797,7 @@ body {
   height: var(--row-height);
   padding: calc(var(--cell-padding-v) + 1px) calc(var(--cell-padding-h) - 5px);
   font-size: var(--sg-font-size-sm);
-  border: 1px solid var(--sg-border-color);
+  border: none;
   background: white;
   cursor: pointer;
   transition: all 0.15s ease;
@@ -668,7 +808,7 @@ body {
   text-align: right;
 }
 
-/* Input Focus State */
+/* Input Focus State (수정 모드 시 활성화 표시) */
 .smartgrid-table tbody td .smartgrid-input:focus,
 .smartgrid-table tbody td .smartgrid-input-select:focus,
 .smartgrid-table tbody td .smartgrid-input-textarea:focus,
@@ -690,10 +830,13 @@ body {
   margin: 0;
 }
 
-/* ===== [17. Edit Mode & Validation] ===== */
+/* ----------------------------------------
+     [17. Edit Mode & Validation] - 편집 및 유효성 검사 상태
+     ---------------------------------------- */
 .smartgrid-table .edit-mode {
-  background: #fff3e0;
+  background: #ff9d00;
 }
+
 
 .smartgrid-table .cell-invalid {
   animation: shake 0.3s ease-in-out;
@@ -702,7 +845,9 @@ body {
 }
 
 @keyframes shake {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateX(0);
   }
 
@@ -715,7 +860,9 @@ body {
   }
 }
 
-/* ===== [18. Pagination] ===== */
+/* ----------------------------------------
+     [18. Pagination] - 페이지네이션 영역
+     ---------------------------------------- */
 .smartgrid-pagination {
   display: flex;
   justify-content: center;
@@ -772,7 +919,9 @@ body {
   transform: none;
 }
 
-/* ===== [19. Loading Spinner] ===== */
+/* ----------------------------------------
+     [19. Loading Spinner] - 로딩 및 스켈레톤 화면
+     ---------------------------------------- */
 .smartgrid-skeleton-loader {
   position: fixed;
   top: 0;
@@ -813,7 +962,9 @@ body {
   font-weight: 500;
 }
 
-/* ===== [20. Toast Notification] ===== */
+/* ----------------------------------------
+     [20. Toast Notification] - 토스트 알림 (배경색 및 Bootstrap Icon 적용)
+     ---------------------------------------- */
 .smartgrid-toast {
   position: fixed;
   top: var(--sg-spacing-xl);
@@ -844,32 +995,80 @@ body {
   border-bottom: 1px solid var(--sg-border-color);
 }
 
-.smartgrid-toast-icon {
-  width: 20px;
-  height: 20px;
-  flex-shrink: 0;
+/* 토스트 배경 및 좌측 강조선 (Color Palette) */
+.smartgrid-toast.info {
+  background-color: #cff4fc;
+  color: #055160;
+  border-left: 5px solid #0dcaf0;
 }
 
+.smartgrid-toast.success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+  border-left: 5px solid #198754;
+}
+
+.smartgrid-toast.warning {
+  background-color: #fff3cd;
+  color: #664d03;
+  border-left: 5px solid #ffc107;
+}
+
+.smartgrid-toast.error {
+  background-color: #f8d7da;
+  color: #842029;
+  border-left: 5px solid #dc3545;
+}
+
+/* 아이콘 래퍼의 기본 스타일 */
+.smartgrid-toast-icon {
+  width: 24px;
+  height: 24px;
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background-color: transparent;
+}
+
+/* 부트스트랩 아이콘 폰트 설정 (::before 가상 요소 사용) */
+.smartgrid-toast-icon::before {
+  font-family: "bootstrap-icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 아이콘 종류별 내용(content) 및 색상 지정 */
 .smartgrid-toast-icon.info::before {
-  content: "ℹ";
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--sg-primary);
+  content: "\F431";
+  /* bi-info-circle-fill */
+  color: #0dcaf0;
 }
 
 .smartgrid-toast-icon.success::before {
-  content: "✓";
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--sg-success);
+  content: "\F26A";
+  /* bi-check-circle-fill */
+  color: #198754;
 }
 
 .smartgrid-toast-icon.warning::before {
-  content: "⚠";
-  font-size: 1rem;
-  font-weight: bold;
-  color: var(--sg-warning);
+  content: "\F33A";
+  /* bi-exclamation-triangle-fill */
+  color: #ffc107;
 }
+
+.smartgrid-toast-icon.error::before {
+  content: "\F62E";
+  /* bi-x-circle-fill */
+  color: #dc3545;
+}
+
 
 .smartgrid-toast-title {
   flex: 1;
@@ -904,7 +1103,9 @@ body {
   color: var(--sg-gray-700);
 }
 
-/* ===== [21. Modal Dialog] ===== */
+/* ----------------------------------------
+     [21. Modal Dialog] - 모달 다이얼로그
+     ---------------------------------------- */
 .smartgrid-modal {
   position: fixed;
   top: 0;
@@ -1017,7 +1218,9 @@ body {
   border-top: 1px solid var(--sg-border-color);
 }
 
-/* ===== [22. Context Menu] ===== */
+/* ----------------------------------------
+     [22. Context Menu] - 오른쪽 클릭 메뉴
+     ---------------------------------------- */
 .smartgrid-context-menu {
   position: fixed;
   min-width: 180px;
@@ -1072,7 +1275,9 @@ body {
   background: var(--sg-border-color);
 }
 
-/* ===== [23. Column Visibility Panel] ===== */
+/* ----------------------------------------
+     [23. Column Visibility Panel] - 칼럼 보이기/숨기기 설정
+     ---------------------------------------- */
 .smartgrid-column-panel {
   position: fixed;
   min-width: 200px;
@@ -1128,7 +1333,9 @@ body {
   cursor: pointer;
 }
 
-/* ===== [24. Utility Classes] ===== */
+/* ----------------------------------------
+     [24. Utility Classes] - 범용 유틸리티 클래스
+     ---------------------------------------- */
 .smartgrid-text-center {
   text-align: center;
 }
@@ -1153,7 +1360,9 @@ body {
   justify-content: center;
 }
 
-/* ===== [25. Responsive Design] ===== */
+/* ----------------------------------------
+     [25. Responsive Design] - 반응형 레이아웃
+     ---------------------------------------- */
 @media (max-width: 768px) {
   body {
     padding: var(--sg-spacing-md);
@@ -1170,6 +1379,7 @@ body {
   }
 
   .smartgrid-container {
+    /* 모바일에서 수평 스크롤 허용 */
     overflow-x: auto;
   }
 
@@ -1181,5 +1391,5 @@ body {
 }
 
 /* ========================================
-   End of SmartGrid Stylesheet
-   ======================================== */
+     End of SmartGrid Stylesheet
+     ======================================== */
