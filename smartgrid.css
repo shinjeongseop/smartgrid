@@ -556,9 +556,11 @@ h1 {
   background: #e8f5e9 !important;
 }
 
+/*
 .smartgrid-table .row-new:hover td {
-  background: #c8e6c9 !important;
+  background: #e8f5e9 !important;
 }
+*/
 
 /* 수정된 행 배경색 변경 (Updated Row State) */
 .smartgrid-table .row-updated td {
@@ -718,7 +720,7 @@ h1 {
 .smartgrid-table .row-new:hover td:nth-child(1),
 .smartgrid-table .row-new:hover td:nth-child(2) {
   /* 일반 셀의 row-new:hover 색상: #c8e6c9 */
-  background: #c8e6c9 !important;
+  background: #e3f2fd !important;
 }
 
 
@@ -1393,4 +1395,3 @@ h1 {
 /* ========================================
      End of SmartGrid Stylesheet
      ======================================== */
-
