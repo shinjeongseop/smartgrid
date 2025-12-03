@@ -1400,14 +1400,3 @@ h1 {
        End of SmartGrid Stylesheet
        ======================================== */
 
-
-/* [ADD] 데이터 열의 최소 너비를 명시하여, 고정 열의 확장을 방지 */
-.smartgrid-table thead th:not(.sg-col-checkbox):not(.sg-col-index),
-.smartgrid-table tbody td:not(.sg-col-checkbox):not(.sg-col-index),
-.smartgrid-table tfoot td:not(.sg-col-checkbox):not(.sg-col-index) {
-  /*
-    ⚠️ 150px은 예시입니다. 모든 데이터 열이 최소 150px 너비를 가지도록 강제합니다.
-    이로 인해 테이블의 전체 너비가 100%를 초과하면 브라우저는 명시된 너비를 존중합니다.
-  */
-  min-width: 150px;
-}
