@@ -428,6 +428,8 @@ h1 {
      [9. Grid Container] - 그리드 테이블 래퍼
      ---------------------------------------- */
 .smartgrid-container {
+  overflow-y: scroll;
+  /* auto → scroll로 변경 */
   overflow: auto;
   height: 500px;
   background: white;
@@ -800,7 +802,7 @@ h1 {
   padding: calc(var(--cell-padding-v) + 1px) calc(var(--cell-padding-h) - 5px);
   font-size: var(--sg-font-size-sm);
   border: none;
-  background: white;
+  background: inherit;
   cursor: pointer;
   transition: all 0.15s ease;
 }
@@ -1382,6 +1384,8 @@ h1 {
 
   .smartgrid-container {
     /* 모바일에서 수평 스크롤 허용 */
+    overflow-y: scroll;
+    /* auto → scroll로 변경 */
     overflow-x: auto;
   }
 
