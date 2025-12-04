@@ -634,16 +634,14 @@ h1 {
 }
 
 /* ----------------------------------------
-       [14. Sticky Columns] - 고정 칼럼 (체크박스/순번)
-       ---------------------------------------- */
+       [14. Sticky Columns] - 고정 칼럼 (체크박스/순번) - Sticky 제거됨
+       ---------------------------------------- */
 .smartgrid-table thead th.sg-col-checkbox,
 .smartgrid-table thead th.sg-col-index,
 .smartgrid-table tbody td.sg-col-checkbox,
 .smartgrid-table tbody td.sg-col-index,
 .smartgrid-table tfoot td.sg-col-checkbox,
 .smartgrid-table tfoot td.sg-col-index {
-  position: sticky;
-  z-index: 5;
   text-align: center;
 }
 
@@ -651,7 +649,6 @@ h1 {
 .smartgrid-table thead th.sg-col-checkbox,
 .smartgrid-table tbody td.sg-col-checkbox,
 .smartgrid-table tfoot td.sg-col-checkbox {
-  left: 0;
   width: var(--sg-col-checkbox-width) !important;
   min-width: var(--sg-col-checkbox-width) !important;
   max-width: var(--sg-col-checkbox-width) !important;
@@ -661,7 +658,6 @@ h1 {
 .smartgrid-table thead th.sg-col-index,
 .smartgrid-table tbody td.sg-col-index,
 .smartgrid-table tfoot td.sg-col-index {
-  left: var(--sg-col-checkbox-width);
   width: var(--sg-col-index-width) !important;
   min-width: var(--sg-col-index-width) !important;
   max-width: var(--sg-col-index-width) !important;
@@ -1399,4 +1395,3 @@ h1 {
 /* ========================================
        End of SmartGrid Stylesheet
        ======================================== */
-
