@@ -441,6 +441,8 @@ h1 {
        [10. Table Base] - 테이블 공통 스타일
        ---------------------------------------- */
 .smartgrid-table {
+  width: 100%;
+  /* 🌟 테이블 너비를 100%로 설정 */
   min-width: 100%;
   border-collapse: separate;
   border-spacing: 0;
@@ -478,6 +480,9 @@ h1 {
   padding: var(--cell-padding-v) var(--cell-padding-h);
   overflow: hidden;
   white-space: nowrap;
+  text-align: center;
+  justify-content: center;
+
 }
 
 /* Header Alignment */
